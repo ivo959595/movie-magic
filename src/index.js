@@ -16,7 +16,12 @@ app.set("views", "./src/views");
 app.use('/static', express.static('src/public'))
 
 app.get("/", (req, res) => {
-  res.render('home', {layout:false})
+  res.render('home')
 });
+
+// app.get("/about", (req,res) => {
+
+// })
+
 
 app.listen(5000, () => console.log("Listening on port 5000"));
