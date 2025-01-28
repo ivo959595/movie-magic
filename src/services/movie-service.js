@@ -1,6 +1,4 @@
 import { create } from "express-handlebars";
-import { v4 as uuid } from "uuid"
-import movies from "../movies.js"
 import Movie from "../models/Movie.js"
 
 export default {
@@ -29,14 +27,12 @@ export default {
         return result;
     },
     create(movieData) {
-        const newId = uuid()
+       const result = Movie.create({
+        ...movieData,
+        rating: Number(movieData.rating),
+        year: Number(movieData.year)
+    })
 
-        movies.push({
-            id: newId,
-            ...movieData,
-            rating: Number(movieData.rating)
-        });
-
-        return  newId
+        return result
     }
 }
