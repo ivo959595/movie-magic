@@ -1,39 +1,42 @@
 import { create } from "express-handlebars";
-import { v4 as uuid } from "uuid";
-import movies from "../movies.js";
-import Movie from "../models/Movie.js";
+import { v4 as uuid } from "uuid"
+import movies from "../movies.js"
+import Movie from "../models/Movie.js"
 
 export default {
-  getAll(filter = {}) {
-    // if (filter.search) {
-    //     result = result.filter(movie => movie.title.toLowerCase().includes(filter.search.toLowerCase()));
-    // }
+    getAll(filter = {}) {
 
-    // if (filter.genre) {
-    //     result = result.filter(movie => movie.genre.toLowerCase() === filter.genre);
-    // }
+        let query = Movie.find({})
 
-    // if (filter.year) {
-    //     result = result.filter(movie => movie.year === filter.year);
-    // }
+        if (filter.search) {
+            query = query.where({title: filter.search})
+        }
+        if (filter.genre) {
+            query = query.where({genre: filter.genre})
+        }
 
-    return Movie.find({});
-  },
+        if (filter.year) {
+            query = query.where({year: Number(filter.year) })
+        }
 
-  getOne(movieId) {
-    const result = Movie.findById(movieId);
+        return query
+    },
+    
+    getOne(movieId){
 
-    return result;
-  },
-  create(movieData) {
-    const newId = uuid();
+        const result = Movie.findById(movieId)
 
-    movies.push({
-      id: newId,
-      ...movieData,
-      rating: Number(movieData.rating),
-    });
+        return result;
+    },
+    create(movieData) {
+        const newId = uuid()
 
-    return newId;
-  },
-};
+        movies.push({
+            id: newId,
+            ...movieData,
+            rating: Number(movieData.rating)
+        });
+
+        return  newId
+    }
+}
