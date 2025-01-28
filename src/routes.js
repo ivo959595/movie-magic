@@ -9,7 +9,7 @@ routes.use(homeController);
 
 routes.use("/movies", movieController);
 
-routes.use('/cast', castControler)
+routes.use('/casts', castControler)
 
 
 routes.get("*", (req, res) => {
