@@ -21,7 +21,6 @@ export default {
     },
     
     getOne(movieId){
-
         const result = Movie.findById(movieId).populate('casts')
 
         return result;
