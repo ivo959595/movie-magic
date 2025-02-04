@@ -8,7 +8,7 @@ import movieService from "../services/movie-service.js";
 
 movieController.get("/search",async (req, res) => {
     const filter = req.query
-    const movies = await movieService.getAll(filter)
+    const movies = await movieService.getAll(filter) 
     res.render('search', { movies, filter });
 })
 
@@ -18,8 +18,11 @@ movieController.get("/create", (req, res) => {
 
 movieController.post("/create", async (req, res) => {
   const newMovie = req.body;
+  const userId = req.user?.id
 
-  
+
+  await movieService.create(newMovie, userId)
+
   res.redirect('/');
 });
 
