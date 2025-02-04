@@ -2,9 +2,9 @@ import User from "../models/User.js";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-const SECRET = 'BASICSECRET';
+const SECRET =  process.env.jwt || 'BASICSECRET';
 
-export default {
+export default { 
     async register(userData) {
    
         const userCount = await User.countDocuments({email: userData.email});
