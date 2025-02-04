@@ -1,6 +1,5 @@
 import { Router } from "express";
 import authService from "../services/auth-service.js";
-import cookieParser from "cookie-parser";
 
 const authController = Router()
 
@@ -26,12 +25,15 @@ authController.post('/login', async (req,res) => {
     try {
       const token = await authService.login(email, password)
 
+      res.cookie('auth', token)
+      
+      res.redirect('/')
+
     } catch (error) {
         console.log(error)
-        return res.redirect('/404')
+        res.redirect('/404')
     }
 
-    res.redirect('/')
 });
 
 export default authController; 
