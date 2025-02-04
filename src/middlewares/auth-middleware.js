@@ -13,8 +13,11 @@ export const authMiddleware = (req, res, next) => {
   try {
     const decodedToken = jwt.verify(token, SECRET);
     req.user = decodedToken;
+
+
   } catch (err) {
-    console.error("Invalid token:", err.message);
+    res.clearCookie('auth')
+    res.redirect('/auth/login')
   }
 
   next();
