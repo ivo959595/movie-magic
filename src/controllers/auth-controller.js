@@ -21,7 +21,6 @@ authController.get('/login', (req, res) => {
 
 authController.post('/login', async (req,res) => {
     const {email, password} = req.body
-
     try {
       const token = await authService.login(email, password)
 
@@ -33,6 +32,15 @@ authController.post('/login', async (req,res) => {
         console.log(error)
         res.redirect('/404')
     }
+});
+
+authController.get('/logout',(req,res) => {
+
+    res.clearCookie('auth')
+
+
+    res.redirect('/')
+
 
 });
 
