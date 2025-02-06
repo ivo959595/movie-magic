@@ -32,7 +32,8 @@ movieController.get("/:movieId/details", async (req, res) => {
 
   const isCreator = movie.creator && movie.creator.toString() === req.user?.id
 
-  res.render("movie/details", { movie, isCreator});
+  res.render("movie/details", { movie, isCreator, user: req.user });
+
 });
 
 
